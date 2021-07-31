@@ -1,24 +1,28 @@
-# Inserting Rows with Core
+# Object Relational Tutorial (1.x API)
 
-from sqlalchemy import insert
-from sqlalchemy import MetaData
-from sqlalchemy import Table, Column, Integer, String
+# Version Check
+# import sqlalchemy
+#
+# print(sqlalchemy.__version__)
+
+
 from sqlalchemy import create_engine
+from sqlalchemy.orm import declarative_base
+from sqlalchemy import Column, Integer, String
 
-metadata = MetaData()
-engine = create_engine("sqlite+pysqlite:///:memory:", echo=True, future=True)
+engine = create_engine('sqlite:///:memory:', echo=True)
+
+Base = declarative_base()
 
 
-user_table = Table(
-    "user_account",
-    metadata,
-    Column('id', Integer, primary_key=True),
-    Column('name', String(30)),
-    Column('fullname', String)
-)
+class User(Base):
+    __tablename__ = 'user'
 
-stmt = insert(user_table).values(name='spongebob', fullname="Spongebob Squarepants")
+    id = Column(Integer, primary_key=True, )
+    name = Column(String, )
+    fullname = Column(String, )
+    nickname = Column(String, )
 
-with engine.connect() as conn:
-    result = conn.execute(stmt)
-    conn.commit()
+    def __repr__(self):
+        return "<User(name='%s', fullname='%s', nickname='%s')>" % (
+            self.name, self.fullname, self.nickname)
