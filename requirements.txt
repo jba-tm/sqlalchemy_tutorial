@@ -1,4 +1,5 @@
 alembic==1.6.5
+Faker==8.11.0
 greenlet==1.1.0
 Mako==1.1.4
 MarkupSafe==2.0.1
@@ -6,3 +7,4 @@ python-dateutil==2.8.2
 python-editor==1.0.4
 six==1.16.0
 SQLAlchemy==1.4.22
+text-unidecode==1.3
